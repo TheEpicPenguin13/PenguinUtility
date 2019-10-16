@@ -23,7 +23,6 @@
 
  module.exports.help = {
      name: "reload",
-     aliases: [""],
      description: "reloads the bot",
      usage: "reload",
      category: "Developer"

@@ -25,8 +25,8 @@ module.exports.run = (bot, message, args) => {
         let cmd;
         if (bot.commands.has(command)) {
             cmd = bot.commands.get(command);
-        } else if (bot.aliases.has(command)) {
-            cmd = bot.commands.get(bot.aliases.get(command));
+        } else {
+            return message.channel.send(`The parameter was invalid, use ${bot.config.prefix}commands to find valid commands.`);
         }
         
         if (!cmd) return message.channel.send(embed.setTitle("Invalid Command").setDescription(`Do \`${bot.config.prefix}help\` for the list of commands.`));
@@ -36,7 +36,6 @@ module.exports.run = (bot, message, args) => {
             `> **Command:** ${command.name.slice(0, 1).toUpperCase() + command.name.slice(1)}`,
             `> **Description:** ${command.description || "No Description Provided."}`,
             `> **Usage:** ${command.usage ? `\`${bot.config.prefix}${command.usage}\`` : "No Usage."}`,
-            `> **Aliases:** ${command.aliases ? command.aliases.join(", ") : "None."}`,
             `> **Category:** ${command.category ? command.category : "General" || "Misc"}`
         ].join("\n"));
 
@@ -66,8 +65,7 @@ module.exports.run = (bot, message, args) => {
 // Command Help
 module.exports.help = {
     name: "help",
-    aliases: ["h"],
-    description: "Help command to show the commands",
+    description: "Help command to show what a specific command does",
     usage: "help (command name)",
     category: "Misc"
 }
