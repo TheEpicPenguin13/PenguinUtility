@@ -1,3 +1,3 @@
 module.exports = () => {
-    console.log("ThisIsCool");
+    console.log("Penguin Utility Has Started.");
 }

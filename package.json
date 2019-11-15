@@ -1,7 +1,6 @@
 {
   "name": "nodeweb",
   "version": "1.0.0",
-  "description": "",
   "main": "src/server.js",
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -17,5 +16,14 @@
     "start": "npx nodemon src/server.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheEpicPenguin13/PenguinUtility.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TheEpicPenguin13/PenguinUtility/issues"
+  },
+  "homepage": "https://github.com/TheEpicPenguin13/PenguinUtility#readme",
+  "description": ""
 }
