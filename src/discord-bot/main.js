@@ -17,6 +17,7 @@ module.exports = function () {
     });
 
     Client.commands = new Discord.Collection();
+    Client.aliases = new Discord.Collection();
 
     FileSystem.readdir(`${__dirname}/commands/`, (err, files) => {
         if (err) return console.error(err);
@@ -24,8 +25,11 @@ module.exports = function () {
             if (!file.endsWith(".js")) return;
             let props = require(`${__dirname}/commands/${file}`);
             let commandName = file.split(".")[0];
-            console.log(`Attemping to load command ${commandName}`);
+            console.log(`Attemping to load command ${commandName}, along with it's aliases.`);
             Client.commands.set(commandName, props);
+            props.config.aliases.forEach(alias => {
+                Client.aliases.set(alias, props);
+            });
         });
     });
 
