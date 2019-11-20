@@ -5,7 +5,12 @@ module.exports = (client, message) => {
     const args = message.content.slice(client.config.prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
     const cmd = client.commands.get(command);
+    const aliCmd = client.aliases.get(command);
 
-    if (!cmd) return;
+    if (!cmd) {
+        if (!aliCmd) return;
+        aliCmd.run(client, message, args);
+    }
+
     cmd.run(client, message, args);
 }
