@@ -3,6 +3,14 @@ const Path = require("path")
 const BodyParser = require("body-parser")
 const Bot = require("./discord-bot/main")
 
+const colors = require("colors");
+colors.setTheme({
+    error: 'red',
+    warn: 'yellow',
+    debug: 'blue',
+    start: 'cyan'
+});
+
 const App = Express()
 
 const port = 5000
@@ -36,5 +44,5 @@ App.post('/startBot', (req, res) => {
 });
 
 const server = App.listen(port, () => {
-    console.log(`Express Running -> PORT ${port}`)
+    console.log(`Express Running -> PORT ${port}`.start);
 });

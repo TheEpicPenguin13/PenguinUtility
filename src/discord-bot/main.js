@@ -4,32 +4,30 @@ module.exports = function () {
 
     const Client = new Discord.Client();
     Client.config = require("./config");
-    
-    FileSystem.readdir(`${__dirname}/events/`, (err, files) => {
-        if (err) return console.error(err);
-        files.forEach(file => {
-            if (!file.endsWith(".js")) return;
-            const event = require(`${__dirname}/events/${file}`);
-            let eventName = file.split(".")[0];
-            Client.on(eventName, event.bind(null, Client));
-            delete require.cache[require.resolve(`${__dirname}/events/${file}`)];
-        });
-    });
-
     Client.commands = new Discord.Collection();
     Client.aliases = new Discord.Collection();
 
-    FileSystem.readdir(`${__dirname}/commands/`, (err, files) => {
-        if (err) return console.error(err);
-        files.forEach(file => {
-            if (!file.endsWith(".js")) return;
-            let props = require(`${__dirname}/commands/${file}`);
-            let commandName = file.split(".")[0];
-            console.log(`Attemping to load command ${commandName}, along with it's aliases.`);
-            Client.commands.set(commandName, props);
-            props.config.aliases.forEach(alias => {
-                Client.aliases.set(alias, props);
+    const modules = Client.config.system.modules;
+    modules.forEach(c => {
+        FileSystem.readdir(`${__dirname}/commands/${c}/`, (err, files) => {
+            if (err) console.warn(`${err}`.red);
+            console.log(`[Command Logs] Loaded ${files.length} commands of module ${c}.`.debug);
+            files.forEach(f => {
+                const props = require(`${__dirname}/commands/${c}/${f}`);
+                Client.commands.set(props.config.name, props);
+                props.config.aliases.forEach(alias => {
+                    Client.aliases.set(alias, props.config.name);
+                });
             });
+        });
+    });
+
+    FileSystem.readdir(`${__dirname}/events/`, (err, files) => {
+        if (err) throw err;
+        files.forEach(f => {
+            const event = require(`${__dirname}/events/${f}`);
+            let eventName = f.split(".")[0];
+            Client.on(eventName, event.bind(null, Client));
         });
     });
 
