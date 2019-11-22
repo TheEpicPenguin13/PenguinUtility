@@ -6,8 +6,11 @@ module.exports.run = (client, message, args) => {
             break;
         case 1:
             const embed = new Discord.RichEmbed()
-            .setTitle(`Help For The Command ${args[0]}`)
-            .setDescription(``);
+            .setTitle(`Help For The Command ${cmd.config.name}`)
+            .setDescription(cmd.config.description)
+            .addField("Aliases", `${cmd.config.aliases.length > 0 ? cmd.config.aliases : "No Aliases"}`)
+            .addField("Usage", cmd.config.usage);
+            message.channel.send({embed});
             break;
         default:
             message.reply("You have supplied too many commands.");

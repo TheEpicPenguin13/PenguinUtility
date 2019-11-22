@@ -3,12 +3,11 @@ const Discord = require("discord.js");
 module.exports.run = (client, message, args) => {
     //-- MEMORY USAGE CALCULATIONS --\\
     let type = client.config.system.memoryDisplayType;
-    let memUsage;
-    if (type == "B") memUsage = process.memoryUsage().heapUsed;
-    if (type == "KB") memUsage = process.memoryUsage().heapUsed / 1024;
-    if (type == "MB") memUsage = process.memoryUsage().heapUsed / 1024 / 1024;
-    if (type == "GB") memUsage = process.memoryUsage().heapUsed / 1024 / 1024 / 1024;
-    if (type == "TB") memUsage = process.memoryUsage().heapUsed / 1024 / 1024 / 1024 / 1024;
+    let memUsage = process.memoryUsage().heapUsed;
+    if (type == "KB") memUsage /= 1024;
+    if (type == "MB") memUsage /= 1024 / 1024;
+    if (type == "GB") memUsage /= 1024 / 1024 / 1024;
+    if (type == "TB") memUsage /= 1024 / 1024 / 1024 / 1024;
 
     //-- TIME CALCULATIONS --\\
     let seconds = Math.floor(client.uptime / 1000);
