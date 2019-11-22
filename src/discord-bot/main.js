@@ -1,3 +1,5 @@
+const Logger = require('../logger');
+
 module.exports = function () {
     const FileSystem = require("fs");
     const Discord = require("discord.js");
@@ -12,6 +14,7 @@ module.exports = function () {
         FileSystem.readdir(`${__dirname}/commands/${c}/`, (err, files) => {
             if (err) console.warn(`${err}`.red);
             console.log(`[Command Logs] Loaded ${files.length} commands of module ${c}.`.debug);
+            Logger.log(`[Command Logs] Loaded ${files.length} command of module ${c}.`);
             files.forEach(f => {
                 const props = require(`${__dirname}/commands/${c}/${f}`);
                 Client.commands.set(props.config.name, props);

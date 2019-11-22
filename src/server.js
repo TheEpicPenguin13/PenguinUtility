@@ -1,7 +1,8 @@
-const Express = require("express")
-const Path = require("path")
-const BodyParser = require("body-parser")
-const Bot = require("./discord-bot/main")
+const Express = require("express");
+const Path = require("path");
+const BodyParser = require("body-parser");
+const Bot = require("./discord-bot/main");
+const Logger = require("./logger");
 
 const colors = require("colors");
 colors.setTheme({
@@ -43,6 +44,10 @@ App.post('/startBot', (req, res) => {
     res.end();
 });
 
-const server = App.listen(port, () => {
+App.listen(port, () => {
     console.log(`Express Running -> PORT ${port}`.start);
+    const currentDate = new Date();
+    const st = `${currentDate.getHours()}:${currentDate.getMinutes()}`;
+    Logger.log('-------------------------------');
+    Logger.log(`Express Running -> PORT ${port}`);
 });

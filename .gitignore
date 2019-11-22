@@ -1,2 +1,3 @@
 /node_modules
 /src/discord-bot/config.json
+/src/discord-bot/logging/
