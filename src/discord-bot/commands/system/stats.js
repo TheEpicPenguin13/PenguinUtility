@@ -36,6 +36,7 @@ module.exports.run = (client, message, args) => {
 
 module.exports.config = {
     name: "stats",
+    description: "Gives you statistics about the bot.",
     aliases: ["statistics"],
     permissionLevel: 6,
     category: "System"
