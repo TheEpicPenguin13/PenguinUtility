@@ -12,7 +12,9 @@ module.exports = function () {
     const modules = Client.config.system.modules;
     modules.forEach(c => {
         FileSystem.readdir(`${__dirname}/commands/${c}/`, (err, files) => {
-            if (err) console.warn(`${err}`.red);
+            if (err) {
+                console.warn(`${err}`.warn);
+            }
             console.log(`[Command Logs] Loaded ${files.length} commands of module ${c}.`.debug);
             Logger.log(`[Command Logs] Loaded ${files.length} command of module ${c}.`);
             files.forEach(f => {
