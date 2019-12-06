@@ -44,6 +44,13 @@ App.post('/startBot', (req, res) => {
     res.end();
 });
 
+App.post('/deleteLogs', (req, res) => {
+    let deleteLogs = require(__dirname + "/discord-bot/web-commands/deleteLogs.js");
+    deleteLogs();
+    res.redirect(`http://localhost:${port}`);
+    res.end();
+});
+
 App.listen(port, () => {
     console.log(`Express Running -> PORT ${port}`.start);
     const currentDate = new Date();

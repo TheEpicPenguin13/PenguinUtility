@@ -12,7 +12,7 @@ module.exports = {
     },
 
     clearLogs: function() {
-        FileSystem.readdirSync(`./src/discord-bot/loggging/`, (err, files) => {
+        FileSystem.readdirSync(`./src/discord-bot/logging/`, (err, files) => {
             if (err) {
                 console.warn(`${err}`.warn);
             }
