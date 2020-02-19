@@ -1,0 +1,10 @@
+{
+    "token": "Njc2OTgwMDIzOTYxNTgzNjE2.XkN1hw.XpCvUlxZ7RH7xAvGlk_lbuY-ZJg",
+    "botsettings": {
+        "prefix": ";"
+    },
+    "modules": [
+        "general",
+        "moderation"
+    ]
+}
